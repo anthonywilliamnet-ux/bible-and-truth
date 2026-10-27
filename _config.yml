@@ -1,0 +1,39 @@
+# =====================================================================
+#  SITE SETTINGS  (change these once, then forget about them)
+# =====================================================================
+title: "Bible & Truth"
+description: "Exploring the Bible, historic Christianity, Church Fathers, and the claims of Islam."
+author: "Anthony William"
+
+# Your GitHub Pages address.
+#   Repo named  bible-and-truth  ->  baseurl: "/bible-and-truth"
+#   Repo named  YOUR-USERNAME.github.io  ->  baseurl: ""
+url: "https://YOUR-USERNAME.github.io"
+baseurl: "/bible-and-truth"
+
+# Contact details (country code + number, no + sign)
+whatsapp: "255703338311"
+email: "anthonywilliam8311@gmail.com"
+
+# How many articles show first, and are added by each "More articles" click
+per_page: 5
+
+
+# =====================================================================
+#  Technical settings (do not change)
+# =====================================================================
+markdown: kramdown
+plugins:
+  - jekyll-sitemap
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - node_modules
+defaults:
+  - scope:
+      path: "articles"
+    values:
+      layout: "article"
+      kind: "article"

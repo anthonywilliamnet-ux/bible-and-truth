@@ -1,0 +1,30 @@
+---
+layout: none
+sitemap: false
+---
+[
+{% assign first = true %}
+{% for p in site.pages %}
+{% if p.layout == "article" %}
+{% assign parts = p.path | split: "/" %}
+{% assign sub = "" %}
+{% if parts.size > 3 %}{% assign sub = parts[2] %}{% endif %}
+{% assign body = p.content | markdownify | strip_html | strip_newlines | normalize_whitespace %}
+{% assign summary = p.summary %}
+{% unless summary %}{% assign summary = body | truncatewords: 28 %}{% endunless %}
+{% if first == false %},{% endif %}
+{% assign first = false %}
+{
+  "title": {{ p.title | default: p.name | jsonify }},
+  "url": {{ p.url | relative_url | jsonify }},
+  "cat": {{ parts[1] | jsonify }},
+  "sub": {{ sub | jsonify }},
+  "date": {{ p.date | date: "%Y-%m-%d" | jsonify }},
+  "author": {{ p.author | default: site.author | jsonify }},
+  "words": {{ body | number_of_words }},
+  "summary": {{ summary | jsonify }},
+  "text": {{ body | truncate: 6000 | jsonify }}
+}
+{% endif %}
+{% endfor %}
+]

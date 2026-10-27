@@ -1,0 +1,20 @@
+---
+layout: default
+title: Contact
+kind: contact
+permalink: /contact/
+---
+<main class="wrap narrow page">
+  <h1>Contact</h1>
+  <p>Have a question, a topic request, or a correction? Message on WhatsApp or send an email.</p>
+  <div class="cta">
+    <a class="btn wa" href="https://wa.me/{{ site.whatsapp }}?text={{ 'Hello, I found you on ' | append: site.title | url_encode }}" target="_blank" rel="noopener"><svg><use href="#wa"/></svg>Chat on WhatsApp</a>
+    <a class="btn alt" href="mailto:{{ site.email }}?subject={{ 'Message from ' | append: site.title | url_encode }}"><svg><use href="#mail"/></svg>Send an email</a>
+  </div>
+  <h2>Or write here</h2>
+  <form class="cf" id="cf">
+    <input name="n" placeholder="Your name" required aria-label="Your name">
+    <textarea name="m" rows="5" placeholder="Your message" required aria-label="Your message"></textarea>
+    <div class="cta" style="margin:0"><button class="btn" type="submit" data-m="e">Send by email</button><button class="btn wa" type="submit" data-m="w">Send by WhatsApp</button></div>
+  </form>
+</main>

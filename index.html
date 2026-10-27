@@ -1,0 +1,32 @@
+---
+layout: default
+title: Home
+kind: home
+---
+<section class="hero"><div class="wrap">
+  <div class="eyebrow">Defending the Christian faith</div>
+  <h1>Truth matters, even when it’s unpopular.</h1>
+  <p>Exploring the Bible, historic Christianity, the Church Fathers, and answering the big questions, including the claims of Islam.</p>
+  <div class="cta"><a class="btn gold" href="#articles">Read the articles</a><a class="btn alt" href="#topics">Browse topics</a></div>
+</div></section>
+
+<section class="verse"><div class="wrap">
+  <div class="vlabel"><svg><use href="#book"/></svg>Daily Verse</div>
+  <div class="vtext"><span id="vt"></span><cite id="vr"></cite></div>
+  <button class="vnew" id="vb" type="button">Another verse</button>
+</div></section>
+
+<main class="wrap">
+  <div class="sec-h" id="articles"><h2>Latest articles</h2><a href="{{ '/articles/' | relative_url }}">View all →</a></div>
+  <!-- This list fills itself from the files in the articles folder. You never edit it. -->
+  <div class="cards" id="cards"><p class="meta">Loading articles…</p></div>
+  <p id="empty" hidden class="note">No articles yet.</p>
+  <div class="pager"><small id="info"></small><button class="btn alt" id="more" type="button">Load more articles</button><button class="btn alt" id="less" type="button">Show less</button></div>
+
+  <div class="sec-h" id="topics" style="margin-top:72px"><h2>Browse by topic</h2></div>
+  <div class="topics">
+    {% for c in site.data.categories %}<a class="topic" href="{{ '/articles/?c=' | append: c.id | relative_url }}"><svg><use href="#{{ c.icon }}"/></svg><b>{{ c.name }}</b><small>{{ c.desc }}</small><span>Explore →</span></a>
+    {% endfor %}
+  </div>
+  <div class="banner">“Sanctify them in the truth; Your word is truth.”<br><small style="font:500 14px Inter,sans-serif;color:var(--mute)">John 17:17</small></div>
+</main>
