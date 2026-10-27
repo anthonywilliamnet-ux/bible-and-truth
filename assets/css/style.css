@@ -1,7 +1,3 @@
-/* =====================================================================
-   Bible & Truth - "Ghost" style: airy, minimal, big type, rounded cards.
-   Two themes. Every colour comes from the variables below.
-   ===================================================================== */
 :root{
   color-scheme:light;
   --bg:#fff;--soft:#f5f6f7;--ink:#15171a;--mute:#5f717b;--line:#e9ebed;
