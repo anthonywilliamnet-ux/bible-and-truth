@@ -1,0 +1,78 @@
+# =====================================================================
+#  CATEGORIES
+#  A category = a folder inside  articles/
+#  A subcategory = a folder inside a category folder (optional)
+#
+#  To add a category:    add 6 lines below, then make the folder.
+#  To add a subcategory: add 3 lines under "subs".
+#  icon must be one of: book, moon, church, cross, leaf, pillar
+#  menu: true  -> also shown in the top menu
+#
+#  (Articles in a folder that is NOT listed here still appear on the
+#   site and in search. They just use the folder name as the title.)
+# =====================================================================
+- id: theology
+  name: Theology
+  icon: book
+  menu: true
+  desc: Christian doctrine, interpretation, and the truth of the Gospel.
+  subs:
+    - id: doctrine-of-god
+      name: Doctrine of God
+      desc: "Who God is and how He acts: sovereignty, the Trinity and more."
+
+- id: islam
+  name: Islamic Dilemma
+  icon: moon
+  menu: true
+  desc: Examining Islam’s claims with Scripture and reason.
+  subs:
+    - id: jesus-in-islam
+      name: Jesus in Islam
+      desc: What the Qur’an and Islamic sources say about Jesus.
+
+- id: fathers
+  name: Church Fathers
+  icon: church
+  menu: true
+  desc: Timeless wisdom from the early Church.
+  subs:
+    - id: apostolic-fathers
+      name: Apostolic Fathers
+      desc: Writers from the generation after the apostles.
+    - id: later-fathers
+      name: Later Church Fathers
+      desc: Augustine and the writers of the fourth and fifth centuries.
+
+- id: bible
+  name: Bible & Scripture
+  icon: cross
+  desc: In-depth studies, verse by verse, and biblical answers.
+  subs:
+    - id: new-testament
+      name: New Testament
+      desc: Studies on the Gospels, the epistles and the manuscripts.
+
+- id: living
+  name: Christian Living
+  icon: leaf
+  desc: Faith lived out with gentleness and courage.
+  subs:
+    - id: defending-the-faith
+      name: Defending the Faith
+      desc: Answering questions with gentleness and respect.
+    - id: prayer-and-devotion
+      name: Prayer and Devotion
+      desc: Practical help for the spiritual life.
+
+- id: history
+  name: History & Apologetics
+  icon: pillar
+  desc: The historical case for the Christian faith.
+  subs:
+    - id: resurrection
+      name: The Resurrection
+      desc: The historical evidence for Easter.
+    - id: early-church
+      name: Early Church History
+      desc: Persecution, growth and outside witnesses.
