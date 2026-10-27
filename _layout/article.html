@@ -1,0 +1,25 @@
+---
+layout: default
+---
+{% assign wc = page.content | number_of_words %}
+{% assign rt = wc | divided_by: 200.0 | ceil %}
+{% if rt < 1 %}{% assign rt = 1 %}{% endif %}
+<div class="progress" id="prog" aria-hidden="true"></div>
+<main class="apage">
+  <article class="page">
+    <div id="crumbs" class="crumbs"></div>
+    <span class="tag" id="atag"></span>
+    <h1>{{ page.title }}</h1>
+    {% if page.summary %}<p class="standfirst">{{ page.summary }}</p>{% endif %}
+    <div class="meta">{% if page.date %}{{ page.date | date: "%b %-d, %Y" }} · {% endif %}{{ page.author | default: site.author }} · {{ rt }} min read</div>
+
+    {{ content }}
+
+    <div class="share" id="share" hidden>
+      <b>Share</b>
+      <a class="btn wa" id="sh-wa" target="_blank" rel="noopener"><svg><use href="#wa"/></svg>WhatsApp</a>
+      <button class="btn alt" id="sh-cp" type="button">Copy link</button>
+    </div>
+  </article>
+  <section class="related" id="related" hidden></section>
+</main>

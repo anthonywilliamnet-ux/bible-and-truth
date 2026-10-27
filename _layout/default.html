@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{% if page.title and page.kind != "home" %}{{ page.title | escape }} | {% endif %}{{ site.title | escape }}</title>
+<meta name="description" content="{{ page.summary | default: page.description | default: site.description | escape }}">
+<meta property="og:site_name" content="{{ site.title | escape }}">
+<meta property="og:title" content="{{ page.title | default: site.title | escape }}">
+<meta property="og:description" content="{{ page.summary | default: page.description | default: site.description | escape }}">
+<meta property="og:type" content="{% if page.kind == 'article' %}article{% else %}website{% endif %}">
+{% if page.noindex %}<meta name="robots" content="noindex">{% endif %}
+<link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff">
+<script>(function(){var t=null;try{t=localStorage.getItem("bt-theme")}catch(e){}if(t!=="light"&&t!=="dark")t=window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.setAttribute("data-theme",t);var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content",t==="dark"?"#0d1626":"#ffffff")})();</script>
+<link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&amp;family=Inter:wght@400;500;600&amp;display=swap">
+</head>
+{% assign parts = page.path | split: "/" %}
+{% assign acat = "" %}
+{% assign asub = "" %}
+{% if page.kind == "article" %}{% assign acat = parts[1] %}{% if parts.size > 3 %}{% assign asub = parts[2] %}{% endif %}{% endif %}
+<body data-page="{{ page.kind | default: 'page' }}" data-cat="{{ acat }}" data-sub="{{ asub }}" data-url="{{ page.url | relative_url }}">
+<a class="skip" href="#main">Skip to content</a>
+{% include icons.html %}
+{% include header.html %}
+
+{{ content }}
+
+{% include footer.html %}
+<script>
+window.BT = {
+  base: {{ site.baseurl | default: "" | jsonify }},
+  whatsapp: {{ site.whatsapp | jsonify }},
+  email: {{ site.email | jsonify }},
+  author: {{ site.author | jsonify }},
+  perPage: {{ site.per_page | default: 5 | jsonify }},
+  cats: {{ site.data.categories | jsonify }},
+  verses: {{ site.data.verses | jsonify }}
+};
+</script>
+<script src="{{ '/assets/js/site.js' | relative_url }}"></script>
+</body>
+</html>
