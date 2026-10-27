@@ -1,0 +1,19 @@
+<header><div class="wrap">
+  <div class="top">
+    <a class="logo" href="{{ '/' | relative_url }}" aria-label="{{ site.title | escape }} home"><svg viewBox="0 0 46 42"><use href="#logo"/></svg><span><b>Bible &amp; Truth</b><small>Theology · Apologetics · Evidence</small></span></a>
+    <nav aria-label="Main menu">
+    <a href="{{ '/' | relative_url }}" data-nav="home">Home</a>
+    <a href="{{ '/articles/' | relative_url }}" data-nav="articles">Articles</a>
+    {% for c in site.data.categories %}{% if c.menu %}<a href="{{ '/articles/?c=' | append: c.id | relative_url }}" data-nav="cat:{{ c.id }}">{{ c.name }}</a>{% endif %}{% endfor %}
+    </nav>
+    <div class="tools">
+      <form class="hsearch" role="search" action="{{ '/articles/' | relative_url }}" method="get">
+        <input id="hs" name="q" type="search" placeholder="Search articles…" aria-label="Search articles" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" role="combobox" aria-expanded="false" aria-controls="sres" aria-autocomplete="list">
+        <button class="sclr" id="sclr" type="button" aria-label="Clear search" hidden><svg aria-hidden="true"><use href="#x"/></svg></button>
+        <button class="sgo" type="submit" aria-label="Search"><svg aria-hidden="true"><use href="#search"/></svg></button>
+        <div class="sres" id="sres" role="listbox" aria-label="Search results" hidden></div>
+      </form>
+      <button class="theme" id="theme" type="button" aria-label="Switch to dark theme" title="Switch to dark theme"><svg class="i-moon" aria-hidden="true"><use href="#moon"/></svg><svg class="i-sun" aria-hidden="true"><use href="#sun"/></svg></button>
+    </div>
+  </div>
+</div></header>

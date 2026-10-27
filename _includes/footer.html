@@ -1,0 +1,14 @@
+<footer><div class="wrap"><div class="fg">
+  <div><a class="logo" href="{{ '/' | relative_url }}"><svg viewBox="0 0 46 42"><use href="#logo"/></svg><span><b style="font-size:19px">Bible &amp; Truth</b></span></a>
+    <p>Equipping believers with truth, defending the faith, and answering today’s biggest questions.</p></div>
+  <div><h5>Quick Links</h5><ul>
+    <li><a href="{{ '/' | relative_url }}">Home</a></li>
+    <li><a href="{{ '/articles/' | relative_url }}">All Articles</a></li>
+    <li><a href="{{ '/about/' | relative_url }}">About</a></li>
+    <li><a href="{{ '/contact/' | relative_url }}">Contact</a></li></ul></div>
+  <div><h5>Categories</h5><ul>
+    {% for c in site.data.categories %}<li><a href="{{ '/articles/?c=' | append: c.id | relative_url }}">{{ c.name }}</a></li>
+    {% endfor %}</ul></div>
+  <div><h5>Follow Us</h5>{% include contact-icons.html %}</div>
+</div>
+<div class="copy">© {{ site.time | date: "%Y" }} Bible &amp; Truth. All rights reserved. Built for the glory of God.</div></div></footer>
