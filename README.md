@@ -59,7 +59,7 @@ Folders can be used straight away. To give a category a proper name, icon, descr
 - Contact details, articles per page: `_config.yml`
 - Daily verses: `_data/verses.yml`
 - Colours and fonts: `assets/css/style.css`. The top of that file holds two colour sets, light (`:root`) and dark (`:root[data-theme="dark"]`); change a colour there and the whole site follows. The sun/moon button in the header switches theme, remembers the choice, and the first visit follows the visitor's device setting.
-- Top menu: `_includes/header.html` (About and Contact are in the footer instead)
+- Top menu: `_includes/header.html` (About and Contact are in the footer instead). Under it sits the topic bar, built from `_data/categories.yml`
 - Article pages automatically get reading time, a progress bar, a contents list (when there are 3 or more `##` headings), WhatsApp / copy-link share buttons and print styles. Nothing to configure.
 - Search: `assets/js/site.js`. The header box shows live results (arrow keys + Enter, Esc to close, `/` to jump to it). On the Articles page every search box filters the list as you type.
 - About page text: `about.html`
