@@ -128,7 +128,7 @@
 
   function card(a) {
     var c = catInfo(a.cat);
-    var meta = [fmtDate(a.date), a.author, a.words ? Math.max(1, Math.ceil(a.words / 200)) + " min read" : ""].filter(Boolean).join(" · ");
+    var meta = [a.author, fmtDate(a.date), a.words ? Math.max(1, Math.ceil(a.words / 200)) + " min read" : ""].filter(Boolean).join(" · ");
     return '<article class="card"><div class="cb"><span class="tag">' + esc(c.name) + '</span>' +
       '<h3><a href="' + esc(a.url) + '">' + esc(a.title) + '</a></h3><p>' + esc(a.summary) + '</p>' +
       '<div class="meta">' + esc(meta) + '</div></div></article>';
@@ -323,6 +323,8 @@
     var params = new URLSearchParams(location.search);
     var st = { c: params.get("c") || "", s: params.get("s") || "", q: params.get("q") || "" };
     var renderList = null;
+    markTag(st.c);
+    if (typeof tagToActive === "function") setTimeout(tagToActive, 0);
     syncInputs(st.q);
     articlesHook = function (v, src) {
       st.q = String(v).trim();
@@ -402,6 +404,7 @@
         var p = new URLSearchParams(location.search);
         st.c = p.get("c") || ""; st.s = p.get("s") || ""; st.q = p.get("q") || "";
         syncInputs(st.q);
+        markTag(st.c);
         render();
       });
       renderList = render;
@@ -425,6 +428,46 @@
       rel.innerHTML = '<h2 class="sub-h">More in ' + esc(sub.length ? subInfo(ac, as).name : catInfo(ac).name) + '</h2><div class="cards">' + pick.map(card).join("") + "</div>";
       rel.hidden = false;
     }).catch(function () { /* related articles are optional */ });
+  }
+
+  /* ---- tag bar under the header: highlight the current topic ---- */
+  function markTag(c) { $$(".tagbar a").forEach(function (a) { a.classList.toggle("on", a.getAttribute("data-tag") === (c || "")); }); }
+  if (kind !== "articles") markTag("");
+
+  /* topic bar: swipe, drag, mouse wheel or the arrow buttons move it sideways */
+  var tw = $("#tags"), tPrev = $(".tb-btn.prev"), tNext = $(".tb-btn.next");
+  function tagArrows() {
+    if (!tw || !tPrev || !tNext) return;
+    tPrev.hidden = tw.scrollLeft < 4;
+    tNext.hidden = tw.scrollLeft + tw.clientWidth >= tw.scrollWidth - 4;
+  }
+  function tagToActive() {
+    var on = tw && tw.querySelector("a.on");
+    if (on) tw.scrollLeft = Math.max(0, on.offsetLeft - 64);
+    tagArrows();
+  }
+  if (tw) {
+    tPrev.addEventListener("click", function () { tw.scrollBy({ left: -tw.clientWidth * 0.7, behavior: "smooth" }); });
+    tNext.addEventListener("click", function () { tw.scrollBy({ left: tw.clientWidth * 0.7, behavior: "smooth" }); });
+    tw.addEventListener("scroll", tagArrows, { passive: true });
+    window.addEventListener("resize", tagArrows);
+    tw.addEventListener("wheel", function (e) {            /* wheel over the bar moves it sideways */
+      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX) || tw.scrollWidth <= tw.clientWidth) return;
+      var atEnd = (e.deltaY > 0 && tw.scrollLeft + tw.clientWidth >= tw.scrollWidth - 1) || (e.deltaY < 0 && tw.scrollLeft <= 0);
+      if (atEnd) return;
+      e.preventDefault(); tw.scrollLeft += e.deltaY;
+    }, { passive: false });
+    var dragX = null, startLeft = 0, moved = false;          /* click and drag with a mouse */
+    tw.addEventListener("pointerdown", function (e) { if (e.pointerType !== "mouse") return; dragX = e.clientX; startLeft = tw.scrollLeft; moved = false; });
+    window.addEventListener("pointermove", function (e) {
+      if (dragX === null) return;
+      var dx = e.clientX - dragX;
+      if (!moved && Math.abs(dx) > 5) { moved = true; tw.classList.add("drag"); }
+      if (moved) tw.scrollLeft = startLeft - dx;
+    });
+    window.addEventListener("pointerup", function () { dragX = null; setTimeout(function () { tw.classList.remove("drag"); }, 0); });
+    window.addEventListener("load", tagToActive);
+    tagArrows();
   }
 
   /* ---- every page: skip link target and back-to-top button ---- */
