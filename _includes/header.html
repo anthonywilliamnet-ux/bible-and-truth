@@ -1,10 +1,11 @@
-<header><div class="wrap">
+<header>
+<div class="wrap">
   <div class="top">
     <a class="logo" href="{{ '/' | relative_url }}" aria-label="{{ site.title | escape }} home"><svg viewBox="0 0 46 42"><use href="#logo"/></svg><span><b>Bible &amp; Truth</b><small>Theology · Apologetics · Evidence</small></span></a>
     <nav aria-label="Main menu">
-    <a href="{{ '/' | relative_url }}" data-nav="home">Home</a>
-    <a href="{{ '/articles/' | relative_url }}" data-nav="articles">Articles</a>
-    {% for c in site.data.categories %}{% if c.menu %}<a href="{{ '/articles/?c=' | append: c.id | relative_url }}" data-nav="cat:{{ c.id }}">{{ c.name }}</a>{% endif %}{% endfor %}
+      <a href="{{ '/' | relative_url }}" data-nav="home">Home</a>
+      <a href="{{ '/articles/' | relative_url }}" data-nav="articles">Articles</a>
+      <a href="{{ '/' | append: '#topics' | relative_url }}" data-nav="topics">Topics</a>
     </nav>
     <div class="tools">
       <form class="hsearch" role="search" action="{{ '/articles/' | relative_url }}" method="get">
@@ -16,4 +17,10 @@
       <button class="theme" id="theme" type="button" aria-label="Switch to dark theme" title="Switch to dark theme"><svg class="i-moon" aria-hidden="true"><use href="#moon"/></svg><svg class="i-sun" aria-hidden="true"><use href="#sun"/></svg></button>
     </div>
   </div>
-</div></header>
+</div>
+{% if page.kind == "home" or page.kind == "articles" %}<div class="tagbar"><button class="tb-btn prev" type="button" aria-label="Scroll topics left" hidden><svg aria-hidden="true"><use href="#arrow"/></svg></button><div class="wrap" id="tags">
+  <a href="{{ '/articles/' | relative_url }}" data-tag="">Latest</a>
+  {% for c in site.data.categories %}<a href="{{ '/articles/?c=' | append: c.id | relative_url }}" data-tag="{{ c.id }}">{{ c.name }}</a>
+  {% endfor %}
+</div><button class="tb-btn next" type="button" aria-label="Scroll topics right" hidden><svg aria-hidden="true"><use href="#arrow"/></svg></button></div>{% endif %}
+</header>
